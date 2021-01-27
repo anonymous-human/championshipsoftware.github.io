@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blog">
+    <meta name="author" content="">
+
+    <title>Championship Software - Blog</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F3EDD5;
+
+        }
+
+        p, li {
+            color: #485460;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #0fbcf9;
+            text-shadow: 2px 2px 2px #485460;
+            font-family: 'Luckiest Guy', cursive;
+        }
+
+        h3 {
+            color: #ffa801;
+        }
+
+        a {
+            color: #0fbcf9;
+            text-shadow: 1px 1px 1px #485460;
+            text-decoration: underline;
+        }
+
+        li, br {
+            margin-bottom: 15px;
+        }
+
+        a:hover {
+            color: #ffa801;
+        }
+    </style>
+
+</head>
+
+<body class="text-light">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col">
+                <a href="/"><img src="/images/WordChop/Logo.png" class="img-fluid" alt="Word Chop"></a>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col">
+                <h1 class="display-4">Word Chop</h1>
+                <h2>A Flutter Project Retrospective</h2>
+                <p>
+                    I recently released version 1.0 of my word game <b>Word Chop</b> on the <a href="https://apps.apple.com/us/app/word-chop/id1545874692">Apple App Store</a> and <a href="https://play.google.com/store/apps/details?id=com.championshipsoftware.word_tile_game">Google Play Store</a>. Since this is my first <a href="https://flutter.dev">Flutter</a> app, I thought I would write a little about my experience with Flutter and the <a href="https://dart.dev">Dart programming language</a>. Usually when I write about anything I end up writing way too much, and I am sure this will be no different. I really love the sound of my own typing.
+                </p>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+        
+                <h2>The Project</h2>
+                <p>
+                    Word Chop, as the name suggests, is a word game. 99.9% of the code-base runs on both iOS and Android, which a few plug-ins helping me in the very few instances where I needed platform-specific code. Google's Flutter toolkit makes it very pleasant to write cross-platform software. I will discuss a little later where Flutter may or may not be right for your project.
+                </p>
+                <p>Word Chop is a single-person project, built over a period of around seven full-time weeks. Those 280 hours were actually stretched over several months, which tells you a little about my work ethic and attention span. [<a href="#footnote-1" name="return-1">1</a>]</p>
+                
+                <h2>Flutter</h2>
+                <h3>The Pros</h3>
+                <p>Whilst Flutter can be used to make apps that look like stock native iOS or Material apps, I think the best Flutter apps I have seen are strongly branded and have custom UIs. A few features make custom UI building a pleasure:</p>
+                <ul>
+                    <li>
+                        <b>Hot Reload</b>: This is probably the killer feature that attracts many developers to using Flutter in the first place. It definitely was for me. Without gushing too much, it is amazing. I am using the now 7-year-old trash-can Mac Pro, and hot-reload means I can save any code-changes and see the results in the simulator or on a device in under a second. I can have multiple simulators and connected devices and see the results in around a second too. Even in rare situations where I need to force a Hot Restart, this only takes a few seconds. (I know SwiftUI and React Native also support hot reload, but I cannot comment on how Flutter's performance compares to those options.)<br/>
+                        The obvious benefit of hot reload is that I can tweak my UI very quickly. Where this really shines is getting 'responsive' layouts to work on different shaped phones, on iPads in portrait, landscape, split-screen, etc.
+                    </li>
+                    <li>
+                        <b>The Widget library</b>: Google attracts some incredibly capable engineering talent and it has very clearly invested a lot of resources into both Flutter and Dart. Looking at the architecture of Flutter, by reading the documentation or digging into the code, so much thought has been put into making a standard library of useful and well-designed UI elements.<br/>
+                        The built-in Flutter widgets generally adhere to a principle of 'do one thing well'. For example rather than setting a 'padding' property on a button, you wrap your button in a Padding widget. Because refactoring support is so good (next bullet point), there is no reason that your Widget tree has to get unwieldy. Having a large nested tree of widgets doesn't seem to be a problem for performance either. I test on phones as old as my trash-can Mac and it is easy to get buttery smooth animations and scrolling.
+                    </li>
+                    <li>
+                        <b>IDE support</b>: I have stuck mostly to Visual Studio Code for the past few years because it has been 'the easiest path' for much of the work that I have needed to do. I started building Word Chop in VS Code and the Flutter/Dart support is fantastic. It definitely pays to spend a little time learning or customizing the keyboard short-cut to bring up the <b>Show Fixes</b> menu:<br/>
+                        <img src="/images/Blog/WordChop/Screenshot1.png" style="width:508px;height:395px;margin: 10px 0px;" /><br/>
+                        The 'Show Fixes' keyboard shortcut is the same shortcut used to offer fixes to problems in your code - unused variables, unused packages, linter warnings, etc. The Flutter plugin extends these fixes to offer a number of very frequently used Widget manipulations - wrap the current widget with another one, remove a widget, move a widget around, etc. It is invaluable.<br/>
+                        (In Android Studio this menu is called 'Show Context Actions'.)<br/>
+                        Whilst Visual Studio Code is excellent, I ended up using Android Studio for most of my project. JetBrains makes amazing IDEs, so it is great that Android Studio is available for free. I used Android Studio because I find the debugging experience superior to VS Code. The Flutter team does a great job on the plugins for both Android Studio and VS Code.<br/>
+                        Android Studio also has a few Flutter tools - Flutter Inspector, Outline, Performance, which I don't think VS Code has. There is also the Flutter 'Dev Tools' which is browser based and offers some nice features tracking down performance problems as well.
+                    </li>
+                    <li>
+                        <b>Great documentation</b>: The documentation on <a href="https://flutter.dev">flutter.dev</a> and <a href="https://dart.dev">dart.dev</a> is excellent and most of the documentation is right there in the source-code. Navigating to great documentation inside your editor is only a keyboard short-cut away.<br/>
+                        The <a href="https://www.youtube.com/channel/UCwXdFgeE9KYzlDdR7TG9cMw">Flutter YouTube channel</a> has heaps of great content as well. There are dozens of 'Flutter Widget of the Week' videos that show how common widgets work in about 90 seconds or less. I have watched all of them. It is a great way to get some familiarity of what is available out of the box. 'The Flutter Boring Show' has much longer and in-depth discussions of many Flutter topics. I think they are also a great resource.
+                    </li>
+                </ul>
+                <h3>The Cons</h3>
+                <ul>
+                    <li>
+                        <b>Easy to learn, difficult to master</b>: As is often the case, I progressed quite quickly at first when building Word Chop. The first time I hit a bit of a road-block was when adding a particular animation - animating letter tiles returning to their original positions on the board if the user chooses to undo their current word.<br/>
+                        Flutter has very powerful animation support so I thought this task would be quite easy. However I had build the 'board' and the 'tray' (the row below the board) as separate widgets, as an excellent software engineer would be expected to do. (In fact the Board and Tray widgets are based on the same widget because they share a lot of the same behaviour and child widgets.)<br/>
+                        Widgets in Flutter cannot directly discover or communicate with their siblings so my Tray widget couldn't ask the Board widget the on-screen positions to animate the tiles back to. This encapsulation is of course quite deliberate and stops hacks like myself from building a pile of unmaintainable silly-string.<br/>
+                        My 'undo' animation feature sent me down a rabbit hole to discover that the Flutter widget tree is actually just one of three trees that Flutter maintains at run-time and that widgets don't really know anything about their on-screen position. Also getting the Tray and Board to communicate got me learning about Dart streams and Flutter Provider (InheritedWidget) and the various common ways that developers architect their Flutter apps. After quite a few hours and a few missteps I managed to get my animation working and gained a better understanding of how Flutter works. This work gave me a pattern to achieve similar animations, including my 'victory' tile animations, as well as other more advanced features.
+                    </li>
+                    <li>
+                        <b>Not For Every Project</b>: I think Flutter was a perfect choice for my particular project. I never encountered any significant roadblocks to getting the project to 'version 1.0'.<br/>
+                        Notably, Word Chop does not require any platform-specific features. If I wanted to take advantage of the rich text editing features in iOS, for example, Flutter would possibly not be a very good choice. Flutter is a bit like a game framework like Unity or Unreal Engine. It renders the entire screen and even though it is possible to make apps that look very much like native iOS apps, they are not using any native iOS UI rendering code. Flutter is 'faking' it.<br/>
+                        It is possible to build 'hybrid' apps that <a href="https://flutter.dev/docs/development/platform-integration/platform-views">host native Android and iOS views</a>, but there are some trade-offs of course.
+                    </li>
+                </ul>
+                <h2>Dart</h2>
+                <p>As well as building the Flutter app itself, I also wrote quite a bit of supporting code to generate the puzzles and to parse Wiktionary into a form that I could use as my game dictionary. My Dart program is able to process the tens of gigabytes of Wiktionary EN XML in a few minutes on a single Mac core - in interpreted mode.</p>
+                <p>A lot of the success of Flutter as a platform is due to the hard work of the Dart compiler team. Dart should be a very comfortable language to use for anyone who has written C#, Swift, Java, JavaScript, etc. It also has a few nice extras thrown in.</p>
+                <p>I have a <b>very</b> strong preference for statically-typed programming languages, so Dart 2.0 (released in 2018) ticks that box for me. They also have <a href="https://dart.dev/null-safety">null safety</a> in beta, so that will make many Swift programmers very happy. (I love Swift optionals, but I haven't yet moved Word Chop to null safety.)</p>
+                <p>Here are another touches that I like about Dart</p>
+                <ul>
+                    <li><b>optional new</b>: when constructing an object, the <b>new</b> keyword has been optional for quite a while and practically no new code uses it. It removes a lot of noise from Widget trees, for example.</li>
+                    <li><b>constructor short-cuts</b>: A constructor like <code>MyWidget({@required this.property1, this.property2});</code> will automatically assign the values of property1 and property2 if passed by the caller. It is nice to eliminate that obvious boiler-plate.</li>
+                    <li><b>async/await</b>: very common in programming languages these days, but I am old enough to still appreciate it.</li>
+                    <li><b>Fast AOT-compile or fast interpreter for Hot Reload</b>: Release builds are fast. Running your interpreted Dart code in the Simulator or on a device is still fast enough to be productive using Hot Reload. It is truly the best of both worlds. I have already mentioned this feature, I know, but I am still totally enamoured.</li>
+                    <li><b>Control your code layout with commas</b>:<br/>
+                        <img src="/images/Blog/WordChop/Screenshot2.png" style="width: 262px; height: 147px; margin: 10px 0;" /><br/>
+                        Android Studio and VS Code can both automatically format your Dart code on save. I am constantly saving to reformat my code which saves a lot of busy work. By choosing to place an extra comma at the end of parameter lists or arrays you can control if your code is automatically split on multiple lines or kept together. The formatter also obeys your margin. I love it!</li>
+                    <li><b>linter</b>: The linter works nicely with Android Studio and VS Code. I use the 'pedantic' package with some extra rules in to give myself an even greater sense of self-satisfaction and smugness.</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>
+                    This turned out to be less of a blog post and more of a list of reasons that I am smitten with Flutter and Dart. I am guessing that you can tell that I had a great time building Word Chop. I really did. I have been programming for more years than I would like to admit and Flutter has rekindled a lot of the feelings that I got from playing with <a href="https://en.wikipedia.org/wiki/Logo_(programming_language)">Logo</a> back in the eighties as a kid. (Okay, I guess I did admit how old I am.)<br/>
+                    The immediacy is addictive. It is going to be pretty hard to go back to some paying gig writing back-end ASP.NET APIs and waiting a seeming eternity for my code to recompile. As the project drags on the compiles get slower and slower...
+                </p>
+            </div>
+            <div class="col-md-3">
+                <img src="/images/WordChop/Screenshot1.png"  class="img-fluid" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h2>Word Chop</h2>
+                <p>If you made it this far, then maybe you can see if Word Chop is actually any good? Here are the store links below:</p>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <a href="https://apps.apple.com/us/app/word-chop/id1545874692">
+                    <img src="/images/AppStore.png" class="img-fluid" alt="App Store">
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://play.google.com/store/apps/details?id=com.championshipsoftware.word_tile_game">
+                    <img src="/images/GooglePlay.png" class="img-fluid" alt="Google Play">
+                </a>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col">
+                <h2>Footnotes</h2>
+                <p>[<a name="footnote-1" href="#return-1">1</a>]: If it looks like a pretty simple app for seven weeks of effort, then please choose one of the following options:</p>
+                <ul>
+                    <li>I am an unproductive software developer (strong possibility)</li>
+                    <li>I did a great job of making something not-so-simple look simple</li>
+                    <li>Flutter is an unproductive toolkit for building software (nope)</li>
+                </ul>
+                <p>Also, the 280 hours includes about 50 hours of me futzing around with graphics and animation, an area where I am
+                    absolutely not an expert.</p>
+                <p>[2]: So I only bothered making one footnote, until I added this one.</p>
+            </div>
+        </div>
+    </div><!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151324272-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-151324272-1');
+    </script>
+
+</body>
+
+</html>
